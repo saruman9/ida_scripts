@@ -4,7 +4,6 @@ from ida_hexrays import (
     init_hexrays_plugin,
     decompile_func,
     hexrays_failure_t,
-    MERR_FUNCSIZE,
     ctree_visitor_t,
     CV_FAST,
     cexpr_t,
@@ -151,7 +150,7 @@ def main():
             break
         caller_function: func_t = get_func(current_xref)
         if caller_function is None:
-            w(f"Callee address ({current_xref:#x}) is not function")
+            p(f"Callee address ({current_xref:#x}) is not function")
             continue
         call_address = caller_function.start_ea
         if call_address in visited_functions:
@@ -168,10 +167,7 @@ def main():
             caller_function, hr_failure, 0 if is_use_cache else DECOMP_NO_CACHE
         )
         if caller_cfunction is None:
-            if hr_failure.code == MERR_FUNCSIZE:
-                p(f"Decompilation failed at {current_xref:#x}: {hr_failure.desc()}")
-            else:
-                w(f"Decompilation failed at {current_xref:#x}: {hr_failure.desc()}")
+            p(f"Decompilation failed at {current_xref:#x}: {hr_failure.desc()}")
             continue
         visitor = CallVisitor(current_xref, arg_num)
         visitor.apply_to(caller_cfunction.body, None)
