@@ -10,4 +10,4 @@
 
 The script renames all functions based on information about calls to this function elsewhere (the new function name is extracted from the target function argument as is).
 
-![rename_func_by_log](https://github.com/user-attachments/assets/a3a297f6-d23b-49bd-a305-66c336ed28d9)
+[rename_func_by_log](https://github.com/user-attachments/assets/11ebf66b-5ed1-41bf-8eb1-54453c115044)
